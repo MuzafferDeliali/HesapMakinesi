@@ -36,23 +36,24 @@ class Ui_MainWindow(object):
         self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.widget.setAutoFillBackground(False)
         self.widget.setObjectName("widget")
-        self.bir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("1"))
+        self.bir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.bir.text()))
         self.bir.setGeometry(QtCore.QRect(77, 229, 50, 50))
         self.bir.setMinimumSize(QtCore.QSize(50, 50))
         self.bir.setMaximumSize(QtCore.QSize(50, 50))
         self.bir.setObjectName("bir")
-        self.arti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("+"))
+        self.arti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("+"))
+        self.arti.setCheckable(True)
         self.arti.setGeometry(QtCore.QRect(275, 229, 50, 50))
         self.arti.setMinimumSize(QtCore.QSize(50, 50))
         self.arti.setMaximumSize(QtCore.QSize(50, 50))
         self.arti.setAccessibleDescription("")
         self.arti.setObjectName("arti")
-        self.uc = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("3"))
+        self.uc = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("3"))
         self.uc.setGeometry(QtCore.QRect(209, 229, 50, 50))
         self.uc.setMinimumSize(QtCore.QSize(50, 50))
         self.uc.setMaximumSize(QtCore.QSize(50, 50))
         self.uc.setObjectName("uc")
-        self.iki = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("2"))
+        self.iki = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("2"))
         self.iki.setGeometry(QtCore.QRect(143, 229, 50, 50))
         self.iki.setMinimumSize(QtCore.QSize(50, 50))
         self.iki.setMaximumSize(QtCore.QSize(50, 50))
@@ -67,17 +68,17 @@ class Ui_MainWindow(object):
         self.esittir.setMinimumSize(QtCore.QSize(50, 50))
         self.esittir.setMaximumSize(QtCore.QSize(50, 50))
         self.esittir.setObjectName("esittir")
-        self.pi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("*3.14"))
+        self.pi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.kaldir())
         self.pi.setGeometry(QtCore.QRect(275, 300, 50, 50))
         self.pi.setMinimumSize(QtCore.QSize(50, 50))
         self.pi.setMaximumSize(QtCore.QSize(50, 50))
         self.pi.setObjectName("pi")
-        self.sifir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("0"))
+        self.sifir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("0"))
         self.sifir.setGeometry(QtCore.QRect(77, 300, 50, 50))
         self.sifir.setMinimumSize(QtCore.QSize(50, 50))
         self.sifir.setMaximumSize(QtCore.QSize(50, 50))
         self.sifir.setObjectName("sifir")
-        self.nokta = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("."))
+        self.nokta = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("."))
         self.nokta.setGeometry(QtCore.QRect(143, 300, 50, 50))
         self.nokta.setMinimumSize(QtCore.QSize(50, 50))
         self.nokta.setMaximumSize(QtCore.QSize(50, 50))
@@ -87,32 +88,32 @@ class Ui_MainWindow(object):
         self.mc.setMinimumSize(QtCore.QSize(50, 50))
         self.mc.setMaximumSize(QtCore.QSize(50, 50))
         self.mc.setObjectName("mc")
-        self.artiVeEksi = QtWidgets.QPushButton(self.widget)
+        self.artiVeEksi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.artieksi())
         self.artiVeEksi.setGeometry(QtCore.QRect(11, 158, 50, 50))
         self.artiVeEksi.setMinimumSize(QtCore.QSize(50, 50))
         self.artiVeEksi.setMaximumSize(QtCore.QSize(50, 50))
         self.artiVeEksi.setObjectName("artiVeEksi")
-        self.bolu = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("/"))
+        self.bolu = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("/"))
         self.bolu.setGeometry(QtCore.QRect(275, 16, 50, 50))
         self.bolu.setMinimumSize(QtCore.QSize(50, 50))
         self.bolu.setMaximumSize(QtCore.QSize(50, 50))
         self.bolu.setObjectName("bolu")
-        self.dort = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("4"))
+        self.dort = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("4"))
         self.dort.setGeometry(QtCore.QRect(77, 158, 50, 50))
         self.dort.setMinimumSize(QtCore.QSize(50, 50))
         self.dort.setMaximumSize(QtCore.QSize(50, 50))
         self.dort.setObjectName("dort")
-        self.alti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("6"))
+        self.alti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("6"))
         self.alti.setGeometry(QtCore.QRect(209, 158, 50, 50))
         self.alti.setMinimumSize(QtCore.QSize(50, 50))
         self.alti.setMaximumSize(QtCore.QSize(50, 50))
         self.alti.setObjectName("alti")
-        self.bes = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("5"))
+        self.bes = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("5"))
         self.bes.setGeometry(QtCore.QRect(143, 158, 50, 50))
         self.bes.setMinimumSize(QtCore.QSize(50, 50))
         self.bes.setMaximumSize(QtCore.QSize(50, 50))
         self.bes.setObjectName("bes")
-        self.eksi = QtWidgets.QPushButton(self.widget)
+        self.eksi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("-"))
         self.eksi.setGeometry(QtCore.QRect(275, 158, 50, 50))
         self.eksi.setMinimumSize(QtCore.QSize(50, 50))
         self.eksi.setMaximumSize(QtCore.QSize(50, 50))
@@ -122,27 +123,27 @@ class Ui_MainWindow(object):
         self.c.setMinimumSize(QtCore.QSize(50, 50))
         self.c.setMaximumSize(QtCore.QSize(50, 50))
         self.c.setObjectName("c")
-        self.carpi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("*"))
+        self.carpi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("*"))
         self.carpi.setGeometry(QtCore.QRect(275, 87, 50, 50))
         self.carpi.setMinimumSize(QtCore.QSize(50, 50))
         self.carpi.setMaximumSize(QtCore.QSize(50, 50))
         self.carpi.setObjectName("carpi")
-        self.yedi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("7"))
+        self.yedi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("7"))
         self.yedi.setGeometry(QtCore.QRect(77, 87, 50, 50))
         self.yedi.setMinimumSize(QtCore.QSize(50, 50))
         self.yedi.setMaximumSize(QtCore.QSize(50, 50))
         self.yedi.setObjectName("yedi")
-        self.sekiz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it("8"))
+        self.sekiz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("8"))
         self.sekiz.setGeometry(QtCore.QRect(143, 87, 50, 50))
         self.sekiz.setMinimumSize(QtCore.QSize(50, 50))
         self.sekiz.setMaximumSize(QtCore.QSize(50, 50))
         self.sekiz.setObjectName("sekiz")
-        self.yuzde = QtWidgets.QPushButton(self.widget)
+        self.yuzde = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.yuzde.text()))
         self.yuzde.setGeometry(QtCore.QRect(11, 87, 50, 50))
         self.yuzde.setMinimumSize(QtCore.QSize(50, 50))
         self.yuzde.setMaximumSize(QtCore.QSize(50, 50))
         self.yuzde.setObjectName("yuzde")
-        self.dokuz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.press_it(self.dokuz.text()))
+        self.dokuz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.dokuz.text()))
         self.dokuz.setGeometry(QtCore.QRect(209, 87, 50, 50))
         self.dokuz.setMinimumSize(QtCore.QSize(50, 50))
         self.dokuz.setMaximumSize(QtCore.QSize(50, 50))
@@ -191,13 +192,21 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def press_it(self, pressed):
-        if pressed == "C":
-            self.ekran.setText("0")
+    def tiklandi(self, pressed):
+            if pressed == "C":
+                self.ekran.setText("0")
+            else:
+                if self.ekran.text() == "0":
+                    self.ekran.setText("")
+                self.ekran.setText(f'{self.ekran.text()}{pressed}')
+
+    def buton_durumu(self):
+        if self.buton.isChecked():
+            print
+            "buton tiklandi"
         else:
-            if self.ekran.text() == "0":
-                self.ekran.setText("")
-            self.ekran.setText(f'{self.ekran.text()}{pressed}')
+            print
+            "buton serbest birakildi"
 
     def kaldir(self):
         ekran = self.ekran.text()
@@ -206,11 +215,12 @@ class Ui_MainWindow(object):
 
     # Hesaplamalar
     def hesapla(self):
+        global sonuc
         ekran = self.ekran.text()
         try:
-            sonuc = eval(ekran)  #'evaluate' kısaltması
+            sonuc = eval(ekran)  # 'evaluate' kısaltması
             sonuc = str(sonuc)
-            if sonuc.endswith('.0'):  #bölümlerde tam sayı olmasına rağmen ondalıklı sayıya çevirir
+            if sonuc.endswith('.0'):  # bölümlerde tam sayı olmasına rağmen ondalıklı sayıya çevirir
                 sonuc = sonuc.replace('.0', '')
                 self.ekran.setText(str(sonuc))
             else:
@@ -227,7 +237,7 @@ class Ui_MainWindow(object):
         self.iki.setText(_translate("MainWindow", "2"))
         self.ac.setText(_translate("MainWindow", "AC"))
         self.esittir.setText(_translate("MainWindow", "="))
-        self.pi.setText(_translate("MainWindow", "¤Ç"))
+        self.pi.setText(_translate("MainWindow", "<-"))
         self.sifir.setText(_translate("MainWindow", "0"))
         self.nokta.setText(_translate("MainWindow", "."))
         self.mc.setText(_translate("MainWindow", "MC"))
@@ -247,6 +257,7 @@ class Ui_MainWindow(object):
         self.marti.setText(_translate("MainWindow", "M+"))
         self.mr.setText(_translate("MainWindow", "MR"))
         self.ekran.setText(_translate("MainWindow", "0"))
+
 
 if __name__ == "__main__":
     import sys
