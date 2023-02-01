@@ -1,4 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from enum import Enum
+hesaplandi = False
+
+class TusTip(Enum):
+    RAKAM = 0
+    ISLEM = 1
+    RESET = 2
+
 
 
 class Ui_MainWindow(object):
@@ -6,20 +14,20 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(361, 471)
-        MainWindow.setMinimumSize(QtCore.QSize(361, 471))
-        MainWindow.setMaximumSize(QtCore.QSize(361, 471))
+        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
+        MainWindow.setMaximumSize(QtCore.QSize(16777215, 9999999))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.centralwidget.setMinimumSize(QtCore.QSize(361, 471))
-        self.centralwidget.setMaximumSize(QtCore.QSize(361, 471))
+        self.centralwidget.setMinimumSize(QtCore.QSize(0, 0))
+        self.centralwidget.setMaximumSize(QtCore.QSize(361, 537))
         self.centralwidget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(10, 80, 341, 371))
+        self.widget.setGeometry(QtCore.QRect(10, 70, 341, 371))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -36,18 +44,21 @@ class Ui_MainWindow(object):
         self.widget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.widget.setAutoFillBackground(False)
         self.widget.setObjectName("widget")
-        self.bir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.bir.text()))
+        self.bir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("1"))
         self.bir.setGeometry(QtCore.QRect(77, 229, 50, 50))
         self.bir.setMinimumSize(QtCore.QSize(50, 50))
         self.bir.setMaximumSize(QtCore.QSize(50, 50))
         self.bir.setObjectName("bir")
         self.arti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("+"))
-        self.arti.setCheckable(True)
         self.arti.setGeometry(QtCore.QRect(275, 229, 50, 50))
         self.arti.setMinimumSize(QtCore.QSize(50, 50))
         self.arti.setMaximumSize(QtCore.QSize(50, 50))
         self.arti.setAccessibleDescription("")
         self.arti.setObjectName("arti")
+        self.buttonGroup = QtWidgets.QButtonGroup(MainWindow)
+        self.buttonGroup.setExclusive(False)  # izin vermemesi gerekiyor
+        self.buttonGroup.setObjectName("buttonGroup")
+        self.buttonGroup.addButton(self.arti)
         self.uc = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("3"))
         self.uc.setGeometry(QtCore.QRect(209, 229, 50, 50))
         self.uc.setMinimumSize(QtCore.QSize(50, 50))
@@ -68,11 +79,11 @@ class Ui_MainWindow(object):
         self.esittir.setMinimumSize(QtCore.QSize(50, 50))
         self.esittir.setMaximumSize(QtCore.QSize(50, 50))
         self.esittir.setObjectName("esittir")
-        self.pi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.kaldir())
-        self.pi.setGeometry(QtCore.QRect(275, 300, 50, 50))
-        self.pi.setMinimumSize(QtCore.QSize(50, 50))
-        self.pi.setMaximumSize(QtCore.QSize(50, 50))
-        self.pi.setObjectName("pi")
+        self.sil = QtWidgets.QPushButton(self.widget, clicked=lambda: self.kaldir())
+        self.sil.setGeometry(QtCore.QRect(275, 300, 50, 50))
+        self.sil.setMinimumSize(QtCore.QSize(50, 50))
+        self.sil.setMaximumSize(QtCore.QSize(50, 50))
+        self.sil.setObjectName("sil")
         self.sifir = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("0"))
         self.sifir.setGeometry(QtCore.QRect(77, 300, 50, 50))
         self.sifir.setMinimumSize(QtCore.QSize(50, 50))
@@ -98,6 +109,7 @@ class Ui_MainWindow(object):
         self.bolu.setMinimumSize(QtCore.QSize(50, 50))
         self.bolu.setMaximumSize(QtCore.QSize(50, 50))
         self.bolu.setObjectName("bolu")
+        self.buttonGroup.addButton(self.bolu)
         self.dort = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("4"))
         self.dort.setGeometry(QtCore.QRect(77, 158, 50, 50))
         self.dort.setMinimumSize(QtCore.QSize(50, 50))
@@ -118,6 +130,7 @@ class Ui_MainWindow(object):
         self.eksi.setMinimumSize(QtCore.QSize(50, 50))
         self.eksi.setMaximumSize(QtCore.QSize(50, 50))
         self.eksi.setObjectName("eksi")
+        self.buttonGroup.addButton(self.eksi)
         self.c = QtWidgets.QPushButton(self.widget, clicked=lambda: self.ekran.setText("0"))
         self.c.setGeometry(QtCore.QRect(11, 229, 50, 50))
         self.c.setMinimumSize(QtCore.QSize(50, 50))
@@ -128,6 +141,7 @@ class Ui_MainWindow(object):
         self.carpi.setMinimumSize(QtCore.QSize(50, 50))
         self.carpi.setMaximumSize(QtCore.QSize(50, 50))
         self.carpi.setObjectName("carpi")
+        self.buttonGroup.addButton(self.carpi)
         self.yedi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("7"))
         self.yedi.setGeometry(QtCore.QRect(77, 87, 50, 50))
         self.yedi.setMinimumSize(QtCore.QSize(50, 50))
@@ -138,12 +152,13 @@ class Ui_MainWindow(object):
         self.sekiz.setMinimumSize(QtCore.QSize(50, 50))
         self.sekiz.setMaximumSize(QtCore.QSize(50, 50))
         self.sekiz.setObjectName("sekiz")
-        self.yuzde = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.yuzde.text()))
+        self.yuzde = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("%"))
         self.yuzde.setGeometry(QtCore.QRect(11, 87, 50, 50))
         self.yuzde.setMinimumSize(QtCore.QSize(50, 50))
         self.yuzde.setMaximumSize(QtCore.QSize(50, 50))
         self.yuzde.setObjectName("yuzde")
-        self.dokuz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi(self.dokuz.text()))
+        self.buttonGroup.addButton(self.yuzde)
+        self.dokuz = QtWidgets.QPushButton(self.widget, clicked=lambda: self.tiklandi("9"))
         self.dokuz.setGeometry(QtCore.QRect(209, 87, 50, 50))
         self.dokuz.setMinimumSize(QtCore.QSize(50, 50))
         self.dokuz.setMaximumSize(QtCore.QSize(50, 50))
@@ -180,7 +195,7 @@ class Ui_MainWindow(object):
         self.ekran.setFrameShape(QtWidgets.QFrame.Panel)
         self.ekran.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.ekran.setLineWidth(2)
-        self.ekran.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.ekran.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.ekran.setObjectName("ekran")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -192,33 +207,55 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def tiklandi(self, pressed):
-            if pressed == "C":
-                self.ekran.setText("0")
-            else:
-                if self.ekran.text() == "0":
-                    self.ekran.setText("")
-                self.ekran.setText(f'{self.ekran.text()}{pressed}')
-
-    def buton_durumu(self):
-        if self.buton.isChecked():
-            print
-            "buton tiklandi"
+    def gettustip(self, pressed):
+        if pressed == "C":
+            return TusTip.RESET
+        elif pressed == "+" or pressed == "-" or pressed == "*" or pressed == "/":
+            return  TusTip.ISLEM
         else:
-            print
-            "buton serbest birakildi"
+            return TusTip.RAKAM
+
+
+    def tiklandi(self, pressed):
+        global hesaplandi
+        yenitip = self.gettustip(pressed)
+        sonkar = self.ekran.text()[-1]
+        sontip = self.gettustip(sonkar)
+
+        if yenitip == TusTip.RESET:
+            self.ekran.setText("0")
+        elif yenitip == TusTip.ISLEM:
+            if sontip == TusTip.ISLEM:
+                self.kaldir()
+                self.ekran.setText(f'{self.ekran.text()}{pressed}')
+            elif sontip == TusTip.RAKAM:
+                self.ekran.setText(f'{self.ekran.text()}{pressed}')
+        elif yenitip == TusTip.RAKAM:
+            if hesaplandi or self.ekran.text() == "0":
+                self.ekran.setText("")
+            self.ekran.setText(f'{self.ekran.text()}{pressed}')
+        hesaplandi = False
 
     def kaldir(self):
-        ekran = self.ekran.text()
-        ekran = ekran[:-1]
-        self.ekran.setText(ekran)
+        s = self.ekran.text()
+        self.ekran.setText(s[:len(s) - 1])
 
-    # Hesaplamalar
-    def hesapla(self):
-        global sonuc
+    def artieksi(self):
         ekran = self.ekran.text()
         try:
             sonuc = eval(ekran)  # 'evaluate' kısaltması
+            ekran = sonuc * -1
+            self.ekran.setText(str(ekran))
+        except:
+            self.ekran.setText(str(ekran))
+
+    # Hesaplamalar
+    def hesapla(self):
+        global hesaplandi
+        hesaplandi = True
+        ekrantext = self.ekran.text()
+        try:
+            sonuc = eval(ekrantext)  # 'evaluate' kısaltması
             sonuc = str(sonuc)
             if sonuc.endswith('.0'):  # bölümlerde tam sayı olmasına rağmen ondalıklı sayıya çevirir
                 sonuc = sonuc.replace('.0', '')
@@ -237,7 +274,7 @@ class Ui_MainWindow(object):
         self.iki.setText(_translate("MainWindow", "2"))
         self.ac.setText(_translate("MainWindow", "AC"))
         self.esittir.setText(_translate("MainWindow", "="))
-        self.pi.setText(_translate("MainWindow", "<-"))
+        self.sil.setText(_translate("MainWindow", "<-"))
         self.sifir.setText(_translate("MainWindow", "0"))
         self.nokta.setText(_translate("MainWindow", "."))
         self.mc.setText(_translate("MainWindow", "MC"))
@@ -261,6 +298,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
