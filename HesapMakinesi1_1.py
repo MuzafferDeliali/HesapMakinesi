@@ -1,12 +1,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from enum import Enum
 hesaplandi = False
+hafiza = "0"
+
 
 class TusTip(Enum):
     RAKAM = 0
     ISLEM = 1
     RESET = 2
-
+    NOKTA = 3
 
 
 class Ui_MainWindow(object):
@@ -94,7 +96,7 @@ class Ui_MainWindow(object):
         self.nokta.setMinimumSize(QtCore.QSize(50, 50))
         self.nokta.setMaximumSize(QtCore.QSize(50, 50))
         self.nokta.setObjectName("nokta")
-        self.mc = QtWidgets.QPushButton(self.widget)
+        self.mc = QtWidgets.QPushButton(self.widget, clicked=lambda: self.M_Clear())
         self.mc.setGeometry(QtCore.QRect(11, 16, 50, 50))
         self.mc.setMinimumSize(QtCore.QSize(50, 50))
         self.mc.setMaximumSize(QtCore.QSize(50, 50))
@@ -163,17 +165,17 @@ class Ui_MainWindow(object):
         self.dokuz.setMinimumSize(QtCore.QSize(50, 50))
         self.dokuz.setMaximumSize(QtCore.QSize(50, 50))
         self.dokuz.setObjectName("dokuz")
-        self.meksi = QtWidgets.QPushButton(self.widget)
+        self.meksi = QtWidgets.QPushButton(self.widget, clicked=lambda: self.M_Eksi())
         self.meksi.setGeometry(QtCore.QRect(143, 16, 50, 50))
         self.meksi.setMinimumSize(QtCore.QSize(50, 50))
         self.meksi.setMaximumSize(QtCore.QSize(50, 50))
         self.meksi.setObjectName("meksi")
-        self.marti = QtWidgets.QPushButton(self.widget)
+        self.marti = QtWidgets.QPushButton(self.widget, clicked=lambda: self.M_Arti())
         self.marti.setGeometry(QtCore.QRect(209, 16, 50, 50))
         self.marti.setMinimumSize(QtCore.QSize(50, 50))
         self.marti.setMaximumSize(QtCore.QSize(50, 50))
         self.marti.setObjectName("marti")
-        self.mr = QtWidgets.QPushButton(self.widget)
+        self.mr = QtWidgets.QPushButton(self.widget, clicked=lambda: self.M_Read())
         self.mr.setGeometry(QtCore.QRect(77, 16, 50, 50))
         self.mr.setMinimumSize(QtCore.QSize(50, 50))
         self.mr.setMaximumSize(QtCore.QSize(50, 50))
@@ -207,14 +209,16 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def gettustip(self, pressed):
+    @staticmethod
+    def gettustip(pressed):
         if pressed == "C":
             return TusTip.RESET
         elif pressed == "+" or pressed == "-" or pressed == "*" or pressed == "/":
-            return  TusTip.ISLEM
+            return TusTip.ISLEM
+        elif pressed == ".":
+            return TusTip.NOKTA
         else:
             return TusTip.RAKAM
-
 
     def tiklandi(self, pressed):
         global hesaplandi
@@ -225,20 +229,52 @@ class Ui_MainWindow(object):
         if yenitip == TusTip.RESET:
             self.ekran.setText("0")
         elif yenitip == TusTip.ISLEM:
-            if sontip == TusTip.ISLEM:
+            if self.ekran.text() == "HATA":
+                self.ekran.setText("0")
+            elif sontip == TusTip.ISLEM:
                 self.kaldir()
                 self.ekran.setText(f'{self.ekran.text()}{pressed}')
             elif sontip == TusTip.RAKAM:
                 self.ekran.setText(f'{self.ekran.text()}{pressed}')
         elif yenitip == TusTip.RAKAM:
-            if hesaplandi or self.ekran.text() == "0":
+            if hesaplandi or self.ekran.text() == "0" or self.ekran.text() == "HATA":
                 self.ekran.setText("")
             self.ekran.setText(f'{self.ekran.text()}{pressed}')
+        elif yenitip == TusTip.NOKTA:
+            if sontip == TusTip.NOKTA:
+                return
+            elif sontip == TusTip.RAKAM:
+                self.ekran.setText(f'{self.ekran.text()}{pressed}')
         hesaplandi = False
 
     def kaldir(self):
         s = self.ekran.text()
-        self.ekran.setText(s[:len(s) - 1])
+        if self.ekran.text() == "HATA" or self.ekran.text() == "0":
+            self.ekran.setText("0")
+        else:
+            self.ekran.setText(s[:len(s) - 1])
+
+    def M_Arti(self):
+        global hafiza
+        hafiza = hafiza + "+" + self.ekran.text()
+        eval(hafiza)
+        print(hafiza)
+
+    def M_Eksi(self):
+        global hafiza
+        hafiza = hafiza + "-" + self.ekran.text()
+        eval(hafiza)
+        print(hafiza)
+
+    def M_Clear(self):
+        global hafiza
+        hafiza = "0"
+        eval(hafiza)
+        print(hafiza)
+
+    def M_Read(self):
+        global hafiza
+        self.ekran.setText(str(hafiza))
 
     def artieksi(self):
         ekran = self.ekran.text()
@@ -256,7 +292,7 @@ class Ui_MainWindow(object):
         ekrantext = self.ekran.text()
         try:
             sonuc = eval(ekrantext)  # 'evaluate' kısaltması
-            sonuc = str(sonuc)
+            sonuc = str("{:.2f}".format(round(sonuc, 2)))
             if sonuc.endswith('.0'):  # bölümlerde tam sayı olmasına rağmen ondalıklı sayıya çevirir
                 sonuc = sonuc.replace('.0', '')
                 self.ekran.setText(str(sonuc))
